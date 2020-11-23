@@ -2,11 +2,11 @@
 
 #find all mirrors, all mirrored nodes will be listening on 93** ... be sure to start node containers on 93**
 
-	mirrors=$(sudo docker.io inspect $(sudo docker.io ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^93 | uniq)
+	mirrors=$(sudo docker inspect $(sudo docker ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^93 | uniq)
 
 #get the bridge, for connecting to the various nodes running in the containers
 
-	bridge=$(sudo docker.io inspect $(sudo docker.io ps | awk '{if(NR>1)print $1}') | grep -m 1 Gateway | grep  -o '[0-9.]*')
+	bridge=$(sudo docker inspect $(sudo docker ps | awk '{if(NR>1)print $1}') | grep -m 1 Gateway | grep  -o '[0-9.]*')
 
 #start printing bsphinx.conf, end with 'agent=' and then..
 
@@ -24,8 +24,8 @@
 
 #to add another shard, with another set of agent mirrors, uncomment this and change "grep ^93" to match the starting numbers for this set of mirrors.. make sure that each set of mirrors starts with unique #s
 
-#	shard=$(sudo docker.io inspect $(sudo docker.io ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^94 | uniq)
-#	shard1=$(sudo docker.io inspect $(sudo docker.io ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^94 | uniq)
+#	shard=$(sudo docker inspect $(sudo docker ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^94 | uniq)
+#	shard1=$(sudo docker inspect $(sudo docker ps | awk '{if(NR>1)print $1}') | grep HostPort | grep -o '[0-9]*' | grep ^94 | uniq)
 
 #... keep adding if necessary.
 
